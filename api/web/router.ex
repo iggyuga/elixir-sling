@@ -1,6 +1,8 @@
 defmodule Sling.Router do
   use Sling.Web, :router
 
+  # . Plugs are like functions that each request will pipe through
+  # similar to a Rails before_action
   pipline :api do
     plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader, realm: "Bearer"
@@ -19,7 +21,7 @@ defmodule Sling.Router do
   scope "/", Sling do
     pipe_through :browser
 
-    get "/". PageController, :index
+    get "/", PageController, :index
   end
 
 
